@@ -1,0 +1,8 @@
+/target/
+/.idea/$PRODUCT_WORKSPACE_FILE$
+/.idea/.gitignore
+/.idea/compiler.xml
+/.idea/encodings.xml
+/imdb-to-jpa.iml
+/.idea/misc.xml
+/.idea/vcs.xml
