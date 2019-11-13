@@ -17,7 +17,7 @@ import java.util.zip.GZIPInputStream;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContextTest.xml"})
 @Transactional
-public class TestNameBasicsRecordParser {
+public class TestNameBasicsDatasetParser {
 
     @Autowired
     private NameBasicsService nameBasicsService;
