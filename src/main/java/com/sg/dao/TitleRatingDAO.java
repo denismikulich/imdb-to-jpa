@@ -10,4 +10,8 @@ public class TitleRatingDAO extends AbstractJpaDAO<TitleRating> {
         super();
         setClazz(TitleRating.class);
     }
+
+    public TitleRating findOne(final String tconst) {
+        return entityManager.find(TitleRating.class, tconst);
+    }
 }

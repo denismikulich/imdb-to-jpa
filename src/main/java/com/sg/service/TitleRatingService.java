@@ -24,4 +24,9 @@ public class TitleRatingService {
         return titleRatingDAO.findAll();
     }
 
+    @Transactional
+    public TitleRating findOne(final String tconst) {
+        return titleRatingDAO.findOne(tconst);
+    }
+
 }

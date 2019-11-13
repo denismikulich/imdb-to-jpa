@@ -2,6 +2,7 @@ package com.sg.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Contains the principal cast/crew for titles
@@ -10,27 +11,17 @@ import java.io.Serializable;
 @Table(name = "title_principals")
 public class TitlePrincipal implements Serializable {
 
-    @Id
-    @GeneratedValue
-    private long id;
-
     /**
      * alphanumeric unique identifier of the title
      */
-    @Column(name = "tconst", nullable = false)
-    private String tconst;
+    @EmbeddedId
+    private TID tid;
 
     /**
      * a number to uniquely identify rows for a given titleId
      */
     @Column
     private Integer ordering;
-
-    /**
-     * alphanumeric unique identifier of the name/person
-     */
-    @Column(name = "nconst")
-    private String nconst;
 
     /**
      * the category of job that person was in
@@ -51,11 +42,14 @@ public class TitlePrincipal implements Serializable {
     private String characters;
 
     public String getTconst() {
-        return tconst;
+        return tid.tconst;
     }
 
     public void setTconst(String tconst) {
-        this.tconst = tconst;
+        if (tid == null) {
+            tid = new TID();
+        }
+        this.tid.tconst = tconst;
     }
 
     public Integer getOrdering() {
@@ -67,11 +61,14 @@ public class TitlePrincipal implements Serializable {
     }
 
     public String getNconst() {
-        return nconst;
+        return tid.nconst;
     }
 
     public void setNconst(String nconst) {
-        this.nconst = nconst;
+        if (tid == null) {
+            tid = new TID();
+        }
+        this.tid.nconst = nconst;
     }
 
     public String getCategory() {
@@ -96,5 +93,32 @@ public class TitlePrincipal implements Serializable {
 
     public void setCharacters(String characters) {
         this.characters = characters;
+    }
+
+    @Embeddable
+    private static class TID implements Serializable {
+        private String tconst;
+        private String nconst;
+
+        public TID() {}
+
+        public TID(String tconst, String nconst) {
+            this.tconst = tconst;
+            this.nconst = nconst;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            TID tID = (TID) o;
+            return tconst.equals(tID.tconst) &&
+                    nconst.equals(tID.nconst);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(tconst, nconst);
+        }
     }
 }

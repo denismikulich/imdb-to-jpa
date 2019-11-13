@@ -10,13 +10,10 @@ import java.io.Serializable;
 @Table(name = "title_rating")
 public class TitleRating implements Serializable {
 
-    @Id
-    @GeneratedValue
-    private long id;
-
     /**
      * alphanumeric unique identifier of the title
      */
+    @Id
     @Column(name = "tconst", nullable = false, unique = true)
     private String tconst;
 

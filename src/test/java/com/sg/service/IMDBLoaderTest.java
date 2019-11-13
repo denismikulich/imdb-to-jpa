@@ -1,6 +1,7 @@
 package com.sg.service;
 
 import org.apache.commons.lang3.NotImplementedException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,12 @@ public class IMDBLoaderTest {
 
     @Autowired
     private IMDBLoader imdbLoader;
+    @Autowired
+    private TitleRatingService titleRatingService;
+    @Autowired
+    private TitleBasicsService titleBasicsService;
+    @Autowired
+    private TitleCrewService titleCrewService;
 
     @Test(expected = NullPointerException.class)
     public void validateSourceDir_NPE() throws IOException, URISyntaxException {
@@ -44,5 +51,13 @@ public class IMDBLoaderTest {
     @Test(expected = NotImplementedException.class)
     public void validateSourceDir_onSite() throws IOException, URISyntaxException {
         imdbLoader.validateSourceDir(new URL("https://datasets.imdbws.com/"));
+    }
+
+    @Test
+    public void load() throws IOException, URISyntaxException {
+        imdbLoader.loadFromDir(getClass().getClassLoader().getResource("data"), 9.0);
+        Assert.assertEquals("expecting 4 ratings of movies", 4, titleRatingService.findAll().size());
+        Assert.assertEquals("expecting 4 movies", 4, titleBasicsService.findAll().size());
+        Assert.assertEquals("expecting 4 records of crew", 4, titleCrewService.findAll().size());
     }
 }
