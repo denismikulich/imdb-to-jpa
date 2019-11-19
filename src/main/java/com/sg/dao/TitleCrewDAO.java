@@ -10,4 +10,8 @@ public class TitleCrewDAO extends AbstractJpaDAO<TitleCrew> {
         super();
         setClazz(TitleCrew.class);
     }
+
+    public TitleCrew findOne(String tconst) {
+        return entityManager.find(TitleCrew.class, tconst);
+    }
 }

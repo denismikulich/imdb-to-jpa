@@ -95,6 +95,17 @@ public class TitlePrincipal implements Serializable {
         this.characters = characters;
     }
 
+    @Override
+    public String toString() {
+        return "TitlePrincipal{" +
+                "tid=" + tid +
+                ", ordering=" + ordering +
+                ", category='" + category + '\'' +
+                ", job='" + job + '\'' +
+                ", characters='" + characters + '\'' +
+                '}';
+    }
+
     @Embeddable
     private static class TID implements Serializable {
         private String tconst;
@@ -119,6 +130,14 @@ public class TitlePrincipal implements Serializable {
         @Override
         public int hashCode() {
             return Objects.hash(tconst, nconst);
+        }
+
+        @Override
+        public String toString() {
+            return "TID{" +
+                    "tconst='" + tconst + '\'' +
+                    ", nconst='" + nconst + '\'' +
+                    '}';
         }
     }
 }

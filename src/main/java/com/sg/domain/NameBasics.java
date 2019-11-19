@@ -95,4 +95,16 @@ public class NameBasics implements Serializable {
     public void setKnownForTitles(String knownForTitles) {
         this.knownForTitles = knownForTitles;
     }
+
+    @Override
+    public String toString() {
+        return "NameBasics{" +
+                "nconst='" + nconst + '\'' +
+                ", primaryName='" + primaryName + '\'' +
+                ", birthYear=" + birthYear +
+                ", deathYear=" + deathYear +
+                ", primaryProfession='" + primaryProfession + '\'' +
+                ", knownForTitles='" + knownForTitles + '\'' +
+                '}';
+    }
 }

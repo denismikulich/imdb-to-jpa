@@ -24,4 +24,8 @@ public class TitleCrewService {
         return titleCrewDAO.findAll();
     }
 
+    public TitleCrew findOne(String tconst) {
+        return titleCrewDAO.findOne(tconst);
+    }
+
 }

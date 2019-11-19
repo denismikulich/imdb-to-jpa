@@ -1,6 +1,7 @@
 package com.sg.dao;
 
 import com.sg.domain.NameBasics;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository

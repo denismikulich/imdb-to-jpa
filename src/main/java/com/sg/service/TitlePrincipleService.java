@@ -23,4 +23,14 @@ public class TitlePrincipleService {
     public List<TitlePrincipal> findAll() {
         return titlePrincipalDAO.findAll();
     }
+
+    @Transactional
+    public boolean hasTitle(String title) {
+        return titlePrincipalDAO.hasTitle(title);
+    }
+
+    @Transactional
+    public boolean hasName(String name) {
+        return titlePrincipalDAO.hasName(name);
+    }
 }

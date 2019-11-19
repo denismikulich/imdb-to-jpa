@@ -1,7 +1,9 @@
 package com.sg.parser;
 
 import com.sg.dao.TitleBasicsDAO;
+import com.sg.service.IMDBLoader;
 import com.sg.service.TitleBasicsService;
+import org.apache.commons.csv.CSVRecord;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,4 +60,5 @@ public class TestTitleBasicsDatasetParser {
         URL titleBasicsURL = classLoader.getResource("data/title.basics.tsv.gz");
         Assert.assertNotNull(titleBasicsURL);
     }
+
 }

@@ -35,6 +35,6 @@ public class TestNameBasicsDatasetParser {
 
         ImdbDatasetParser.readAndSave(buffered, new NameBasicsRecordParser(), nameBasicsDAO);
 
-        Assert.assertEquals("expecting 40 names records", 40, nameBasicsService.findAll().size());
+        Assert.assertEquals("expecting 58 names records", 58, nameBasicsService.findAll().size());
     }
 }

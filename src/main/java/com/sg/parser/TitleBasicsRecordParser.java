@@ -3,10 +3,13 @@ package com.sg.parser;
 import com.sg.domain.TitleBasics;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.Optional;
 
 public class TitleBasicsRecordParser implements ImdbRecordParser<TitleBasics> {
+    private static Log log = LogFactory.getLog(TitleBasicsRecordParser.class);
 
     @Override
     public TitleBasics apply(CSVRecord record) {
@@ -25,6 +28,7 @@ public class TitleBasicsRecordParser implements ImdbRecordParser<TitleBasics> {
                 .map(NumberUtils::createInteger)
                 .ifPresent(entity::setRuntimeMinutes);
         entity.setGenres(record.get("genres"));
+        log.trace("Parsed: " + entity.toString());
         return entity;
     }
 }

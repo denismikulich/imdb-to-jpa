@@ -138,4 +138,19 @@ public class TitleBasics implements Serializable {
     public void setGenres(String genres) {
         this.genres = genres;
     }
+
+    @Override
+    public String toString() {
+        return "TitleBasics{" +
+                "tconst='" + tconst + '\'' +
+                ", titleType='" + titleType + '\'' +
+                ", primaryTitle='" + primaryTitle + '\'' +
+                ", originalTitle='" + originalTitle + '\'' +
+                ", isAdult=" + isAdult +
+                ", startYear=" + startYear +
+                ", endYear=" + endYear +
+                ", runtimeMinutes=" + runtimeMinutes +
+                ", genres='" + genres + '\'' +
+                '}';
+    }
 }

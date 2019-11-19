@@ -11,12 +11,17 @@ import java.io.Serializable;
 public class ImdbDatasetParser {
 
     public static <T extends Serializable> void readAndSave(final Reader in, ImdbRecordParser<T> recordParser, AbstractJpaDAO<T> dao) throws IOException {
-        Iterable<CSVRecord> records = CSVFormat
-                .TDF
-                .withFirstRecordAsHeader()
-                .parse(in);
+        Iterable<CSVRecord> records = read(in);
         for (CSVRecord record : records) {
             dao.create(recordParser.apply(record));
         }
+    }
+
+    public static Iterable<CSVRecord> read(final Reader in) throws IOException {
+        return CSVFormat
+                .TDF
+                .withFirstRecordAsHeader()
+                .withQuote(null)
+                .parse(in);
     }
 }

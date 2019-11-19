@@ -52,4 +52,13 @@ public class TitleCrew implements Serializable {
     public void setWriters(String writers) {
         this.writers = writers;
     }
+
+    @Override
+    public String toString() {
+        return "TitleCrew{" +
+                "tconst='" + tconst + '\'' +
+                ", directors='" + directors + '\'' +
+                ", writers='" + writers + '\'' +
+                '}';
+    }
 }
