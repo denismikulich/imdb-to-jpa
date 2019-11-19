@@ -3,6 +3,8 @@ package com.sg.measure;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.util.Optional;
+
 public class ImdbLoadingWatcher {
     private static Log log = LogFactory.getLog(ImdbLoadingWatcher.class);
 
@@ -11,6 +13,8 @@ public class ImdbLoadingWatcher {
     private TimeMarker loadRatings;
     private TimeMarker loadBasics;
     private TimeMarker loadCrews;
+    private TimeMarker loadPricipals;
+    private TimeMarker loadNames;
 
     public ImdbLoadingWatcher() {
         this(log.isTraceEnabled());
@@ -22,6 +26,8 @@ public class ImdbLoadingWatcher {
         this.loadRatings = new TimeMarker(isEnabled);
         this.loadBasics = new TimeMarker(isEnabled);
         this.loadCrews = new TimeMarker(isEnabled);
+        this.loadPricipals = new TimeMarker(isEnabled);
+        this.loadNames = new TimeMarker(isEnabled);
     }
 
     public void startValidateSourceDir() {
@@ -32,28 +38,23 @@ public class ImdbLoadingWatcher {
         this.validateSourceDir.finish();
     }
 
-    public void startLoadRatings() {
-        this.loadRatings.start();
-    }
-
-    public void finishLoadRatings() {
-        this.loadRatings.finish();
-    }
-
-    public void startLoadBasics() {
-        this.loadBasics.start();
-    }
-
-    public void finishLoadBasics() {
-        this.loadBasics.finish();
-    }
-
-    public void startLoadCrews() {
-        this.loadCrews.start();
-    }
-
-    public void finishLoadCrews() {
-        this.loadCrews.finish();
+    public Optional<TimeMarker> getMarkerByFilename(final String imdbDataFile) {
+        if (imdbDataFile.contains("title.ratings")) {
+            return Optional.of(this.loadRatings);
+        }
+        if (imdbDataFile.contains("title.basics")) {
+            return Optional.of(this.loadBasics);
+        }
+        if (imdbDataFile.contains("title.crew")) {
+            return Optional.of(this.loadCrews);
+        }
+        if (imdbDataFile.contains("title.principals")) {
+            return Optional.of(this.loadPricipals);
+        }
+        if (imdbDataFile.contains("name.basics")) {
+            return Optional.of(this.loadNames);
+        }
+        return Optional.empty();
     }
 
     public void statistics() {
@@ -64,6 +65,8 @@ public class ImdbLoadingWatcher {
         sb.append("loading title ratings ").append(loadRatings.simpleStatistic()).append("\n");
         sb.append("loading title basics ").append(loadBasics.simpleStatistic()).append("\n");
         sb.append("loading title crews ").append(loadCrews.simpleStatistic()).append("\n");
+        sb.append("loading principals ").append(loadCrews.simpleStatistic()).append("\n");
+        sb.append("loading names ").append(loadCrews.simpleStatistic()).append("\n");
 
         log.trace(sb.toString());
     }

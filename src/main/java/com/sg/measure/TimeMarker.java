@@ -39,7 +39,11 @@ public class TimeMarker {
 
     public String simpleStatistic() {
         StringBuilder sb = new StringBuilder();
-        sb.append("time: ").append(this.total()).append("ms");
+        if (this.total() > 60*1000) {
+            sb.append("time: ").append(this.total()/60).append("sec");
+        } else {
+            sb.append("time: ").append(this.total()).append("ms");
+        }
         return sb.toString();
     }
 

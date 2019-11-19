@@ -28,7 +28,7 @@
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
                 <prop key="hibernate.connection.pool_size">5</prop>
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.format_sql">false</prop>
                 <prop key="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</prop>
                 <prop key="hibernate.connection.username">sa</prop>

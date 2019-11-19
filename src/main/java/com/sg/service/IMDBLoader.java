@@ -2,6 +2,7 @@ package com.sg.service;
 
 import com.sg.domain.*;
 import com.sg.measure.ImdbLoadingWatcher;
+import com.sg.measure.TimeMarker;
 import com.sg.parser.*;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.NotImplementedException;
@@ -117,7 +118,7 @@ public class IMDBLoader {
 
     private <T> void loadRecords(final URL sourceDir, final String imdbDataFile, ImdbRecordParser<T> parser, Function<T, Boolean> handler) throws IOException {
         log.debug("Started loading of '" + imdbDataFile + "'");
-        watcher.startLoadCrews();
+        watcher.getMarkerByFilename(imdbDataFile).ifPresent(TimeMarker::start);
         int recordsCount = 0;
         int entityCount = 0;
         Optional<T> lastSuccess = Optional.empty();
@@ -140,7 +141,7 @@ public class IMDBLoader {
             throw exc;
         }
         log.debug("'" + imdbDataFile + "' fully processed: total records " + recordsCount + ", loaded " + entityCount);
-        watcher.finishLoadCrews();
+        watcher.getMarkerByFilename(imdbDataFile).ifPresent(TimeMarker::finish);
     }
 
     void validateSourceDir(final URL sourceDir) throws URISyntaxException, IOException {
