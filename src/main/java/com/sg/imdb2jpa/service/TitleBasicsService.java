@@ -25,6 +25,11 @@ public class TitleBasicsService {
     }
 
     @Transactional
+    public List<TitleBasics> findAll(int first, int count) {
+        return titleBasicsDAO.findAll(first, count);
+    }
+
+    @Transactional
     public TitleBasics findOne(final String tconst) {
         return titleBasicsDAO.findOne(tconst);
     }

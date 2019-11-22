@@ -25,6 +25,13 @@ public abstract class AbstractJpaDAO<T extends Serializable> {
         return entityManager.createQuery("from " + clazz.getName()).getResultList();
     }
 
+    public List<T> findAll(int first, int count) {
+        return entityManager.createQuery("from " + clazz.getName())
+                .setFirstResult(first)
+                .setMaxResults(count)
+                .getResultList();
+    }
+
     public void create(final T entity) {
         entityManager.persist(entity);
     }
